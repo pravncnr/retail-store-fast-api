@@ -1,12 +1,14 @@
-from sqlalchemy.orm import declarative_base, sessionmaker
-from sqlalchemy import Column, Integer, String, Float, Date, create_engine
-from pydantic import BaseModel, field_validator
-from typing import List, Optional
 from datetime import date, datetime
+from typing import List, Optional
+
+from pydantic import BaseModel, field_validator
+from sqlalchemy import Column, Integer, String, Float, Date, create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 Base = declarative_base()
 # DATABASE_URL = "postgresql://postgres:root@localhost/pricing_db"
 DATABASE_URL = "postgresql://postgres:root@localhost/pricing_db_2"
+
 
 class PricingFeed(Base):
     __tablename__ = "pricing_feeds"
@@ -67,6 +69,7 @@ class UpdateRequest(BaseModel):
             date: lambda dt: dt.isoformat()  # Convert date to ISO 8601 string (e.g., '2024-07-05')
         }
 
+
 class SearchRequest(BaseModel):
     store_id: Optional[str] = None
     search_sku: Optional[str] = None
@@ -96,6 +99,7 @@ class SearchRequest(BaseModel):
         json_encoders = {
             date: lambda dt: dt.isoformat()  # Convert date to ISO 8601 string (e.g., '2024-07-05')
         }
+
 
 class PricingFeedUpdate(BaseModel):
     store_id: Optional[str]
