@@ -1,0 +1,10 @@
+psycopg2
+asyncpg
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+celery
+redis
+aiofiles
+python-multipart
